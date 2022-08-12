@@ -1,7 +1,7 @@
 export default function MkdSDK() {
   this._baseurl = "https://reacttask.mkdlabs.com";
   this._project_id = "reacttask";
-  this._secret = process.env.local.MY_SECRET_KEY;
+  this._secret = "5fchxn5m8hbo6jcxiq3xddofodoacskye";
   this._table = "";
   this._custom = "";
   this._method = "";
@@ -16,23 +16,20 @@ export default function MkdSDK() {
   this.login = async function (email, password, role) {
     const url = "https://reacttask.mkdlabs.com/v2/api/lambda/login"
 
-    headers = {
-      Accept: "application/json, text/plain, */*",
-      "Content-Type": "application/json",
-      "x-project": base64Encode
-    }
-
-    const data = {
-      email: email,
-      password: password,
-      role: role
-    }
-
     try {
       const response = await fetch(url, {
         method: "POST",
-        headers,
-        body: JSON.stringify(data),
+        headers: {
+          "Content-Type": "application/json",
+          "X-Project": base64Encode
+        },
+        body: JSON.stringify(
+          {
+            email: email,
+            password: password,
+            role: role
+          }
+        ),
       })
       const data = response.json();
       return data
@@ -113,22 +110,19 @@ export default function MkdSDK() {
   this.check = async function (role) {
     //TODO
     const url = "https://reacttask.mkdlabs.com/v2/api/lambda/check"
-    method = "POST"
-    header = {
-      Accept: "application/json, text/plain, */*",
-      "Content-Type": "application/json",
-      "x-project": base64Encode,
-      Authorization: "Bearer " + localStorage.getItem("token")
-    }
-    data = {
-      role: "admin"
-    }
 
     try {
       const response = await fetch(url, {
-        method,
-        headers: header,
-        body: JSON.stringify(data),
+        method: "POST",
+        headers: {
+          Accept: "application/json, text/plain, */*",
+          "Content-Type": "application/json",
+          "x-project": base64Encode,
+          Authorization: "Bearer " + localStorage.getItem("token")
+        },
+        body: JSON.stringify({
+          role: "admin"
+        }),
       })
       const data = await response.json();
       if(data.status === 200) {

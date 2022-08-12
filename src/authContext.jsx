@@ -50,7 +50,7 @@ const AuthProvider = ({ children }) => {
 
   React.useEffect(() => {
     //TODO
-    const res = await sdk.check(localStorage.getItem("role"));
+    const res = sdk.check(localStorage.getItem("role"));
     if (res.status === 200) {
       dispatch({
         type: "SET_ROLE",
@@ -61,7 +61,7 @@ const AuthProvider = ({ children }) => {
       type: "SET_ROLE",
       role: null,
       });
-  }
+    }
   }, []);
 
   return (

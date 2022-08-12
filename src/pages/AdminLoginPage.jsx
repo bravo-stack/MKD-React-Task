@@ -5,6 +5,7 @@ import * as yup from "yup";
 import MkdSDK from "../utils/MkdSDK";
 import { useNavigate } from "react-router-dom";
 import { AuthContext } from "../authContext";
+import SnackBar from "../components/SnackBar";
 
 const AdminLoginPage = () => {
   const schema = yup
@@ -31,18 +32,14 @@ const AdminLoginPage = () => {
     if (data.email) {
       try {
         const response = await sdk.login(data.email, data.password, "admin");
-        if (response.status === 200) {
-          dispatch({
-            type: "LOGIN",
-            isAuthenticated: true,
-            user: response.user,
-            token: response.token,
-            role: response.role,
-          });
-          navigate("/admin/dashboard", { replace: true });
-          } else {
-            throw new Error("Couldn't login");
-          }
+        dispatch({
+          type: "LOGIN",
+          isAuthenticated: true,
+          user: response.user,
+          token: response.token,
+          role: response.role,
+        });
+        navigate("/admin/dashboard", { replace: true });
       } catch(error) {
         console.log(error);
       }

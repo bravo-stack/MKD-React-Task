@@ -1,7 +1,6 @@
 import React from "react";
 import { AuthContext } from "./authContext";
 import { Routes, Route, Navigate } from "react-router-dom";
-import SnackBar from "./components/SnackBar";
 import AdminDashboardPage from "./pages/AdminDashboardPage";
 import AdminLoginPage from "./pages/AdminLoginPage";
 import NotFoundPage from "./pages/NotFoundPage";
@@ -21,8 +20,8 @@ function renderRoutes(role) {
     default:
       return (
         <Routes>
-          <Route exact path="/admin/login" element={<AdminLoginPage />}></Route>
-          <Route path="*" exact element={<NotFoundPage />}></Route>
+          <Route exact path="/admin/dashboard" element={<NotFoundPage />}></Route>
+          <Route path="/" exact element={<AdminLoginPage />}></Route>
         </Routes>
       );
       break;
@@ -43,7 +42,6 @@ function Main() {
           </div>
         </div>
       </div>
-      {state.isAuthenticated&&<SnackBar />}
     </div>
   );
 }
