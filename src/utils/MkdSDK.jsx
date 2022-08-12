@@ -1,7 +1,7 @@
 export default function MkdSDK() {
   this._baseurl = "https://reacttask.mkdlabs.com";
   this._project_id = "reacttask";
-  this._secret = "5fchxn5m8hbo6jcxiq3xddofodoacskye";
+  this._secret = process.env.local.MY_SECRET_KEY;
   this._table = "";
   this._custom = "";
   this._method = "";
