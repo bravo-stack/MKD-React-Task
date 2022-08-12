@@ -34,7 +34,8 @@ export default function MkdSDK() {
         headers,
         body: JSON.stringify(data),
       })
-      return response;
+      const data = response.json();
+      return data
     } catch (error) {
       console.log(error)
     }
