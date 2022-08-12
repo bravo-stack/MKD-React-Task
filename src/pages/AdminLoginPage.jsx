@@ -32,16 +32,22 @@ const AdminLoginPage = () => {
     if (data.email) {
       try {
         const response = await sdk.login(data.email, data.password, "admin");
-        dispatch({
-          type: "LOGIN",
-          isAuthenticated: true,
-          user: response.user,
-          token: response.token,
-          role: response.role,
-        });
-        navigate("/admin/dashboard", { replace: true });
+        if(response.error===false) {
+          dispatch({
+            type: "LOGIN",
+            isAuthenticated: true,
+            user: response.user,
+            token: response.token,
+            role: response.role,
+          });
+          navigate("/admin/dashboard", { replace: true });
+        } else {
+          navigate("/", { replace: true });
+          throw new Error("Login Unsuccessful")
+        }
       } catch(error) {
         console.log(error);
+        navigate("/", {replace: true});
       }
     } else {
       console.log("email is required");

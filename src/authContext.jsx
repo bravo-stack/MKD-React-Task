@@ -51,16 +51,16 @@ const AuthProvider = ({ children }) => {
   React.useEffect(() => {
     //TODO
     const res = sdk.check(localStorage.getItem("role"));
-    if (res.status === 200) {
+    if (res.error === false) {
       dispatch({
-        type: "SET_ROLE",
-        role: res.data,
+        type: "LOGIN"
       });
+      console.log("okay")
     } else {
     dispatch({
-      type: "SET_ROLE",
-      role: null,
+      type: "LOGOUT"
       });
+      console.log("not okay")
     }
   }, []);
 

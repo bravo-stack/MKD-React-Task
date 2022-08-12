@@ -1,7 +1,7 @@
 export default function MkdSDK() {
   this._baseurl = "https://reacttask.mkdlabs.com";
   this._project_id = "reacttask";
-  this._secret = process.env.MY_SECRET_KEY;
+  this._secret = "5fchxn5m8hbo6jcxiq3xddofodoacskye";
   this._table = "";
   this._custom = "";
   this._method = "";
@@ -125,7 +125,7 @@ export default function MkdSDK() {
         }),
       })
       const data = await response.json();
-      if(data.status === 200) {
+      if(data.error === false) {
         console.log("Token is still valid")
         return data 
       } else {
