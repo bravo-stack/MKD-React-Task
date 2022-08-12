@@ -112,6 +112,35 @@ export default function MkdSDK() {
 
   this.check = async function (role) {
     //TODO
+    const url = "https://reacttask.mkdlabs.com/v2/api/lambda/check"
+    method = "POST"
+    header = {
+      Accept: "application/json, text/plain, */*",
+      "Content-Type": "application/json",
+      "x-project": base64Encode,
+      Authorization: "Bearer " + localStorage.getItem("token")
+    }
+    data = {
+      role: "admin"
+    }
+
+    try {
+      const response = await fetch(url, {
+        method,
+        headers: header,
+        body: JSON.stringify(data),
+      })
+      const data = await response.json();
+      if(data.status === 200) {
+        console.log("Token is still valid")
+        return data 
+      } else {
+        console.log("Token is no longer valid")
+        throw new Error("Invalid Token Response")
+      }
+    } catch (error) {
+      console.log(error)
+    }
   };
 
   return this;
