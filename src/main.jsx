@@ -43,7 +43,7 @@ function Main() {
           </div>
         </div>
       </div>
-      <SnackBar />
+      {state.isAuthenticated&&<SnackBar />}
     </div>
   );
 }

@@ -33,8 +33,13 @@ const AdminLoginPage = () => {
         const response = await sdk.login(data.email, data.password, "admin");
         if (response.status === 200) {
           dispatch({
-            type: "LOGIN"
+            type: "LOGIN",
+            isAuthenticated: true,
+            user: response.user,
+            token: response.token,
+            role: response.role,
           });
+          navigate("/admin/dashboard", { replace: true });
           } else {
             throw new Error("Couldn't login");
           }

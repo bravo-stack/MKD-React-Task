@@ -135,8 +135,8 @@ export default function MkdSDK() {
         console.log("Token is still valid")
         return data 
       } else {
-        console.log("Token is no longer valid")
-        throw new Error("Invalid Token Response")
+        console.log("TOKEN_EXPIRED")
+        throw new Error("TOKEN_EXPIRED")
       }
     } catch (error) {
       console.log(error)

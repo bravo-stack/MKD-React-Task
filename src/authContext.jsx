@@ -16,6 +16,10 @@ const reducer = (state, action) => {
       //TODO
       return {
         ...state,
+        isAuthenticated: action.isAuthenticated,
+        user: action.user,
+        token: action.token,
+        role: action.role,
       };
     case "LOGOUT":
       localStorage.clear();
@@ -46,6 +50,18 @@ const AuthProvider = ({ children }) => {
 
   React.useEffect(() => {
     //TODO
+    const res = await sdk.check(localStorage.getItem("role"));
+    if (res.status === 200) {
+      dispatch({
+        type: "SET_ROLE",
+        role: res.data,
+      });
+    } else {
+    dispatch({
+      type: "SET_ROLE",
+      role: null,
+      });
+  }
   }, []);
 
   return (
