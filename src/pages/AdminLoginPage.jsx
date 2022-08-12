@@ -28,6 +28,22 @@ const AdminLoginPage = () => {
   const onSubmit = async (data) => {
     let sdk = new MkdSDK();
     //TODO
+    if (data.email) {
+      try {
+        const response = await sdk.login(data.email, data.password, "admin");
+        if (response.status === 200) {
+          dispatch({
+            type: "LOGIN"
+          });
+          } else {
+            throw new Error("Couldn't login");
+          }
+      } catch(error) {
+        console.log(error);
+      }
+    } else {
+      console.log("email is required");
+    }
   };
 
   return (
