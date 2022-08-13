@@ -1,9 +1,10 @@
 import React from "react";
 import { AuthContext } from "./authContext";
-import { Routes, Route, Navigate } from "react-router-dom";
+import { Routes, Route, Navigate, useNavigate } from "react-router-dom";
 import AdminDashboardPage from "./pages/AdminDashboardPage";
 import AdminLoginPage from "./pages/AdminLoginPage";
 import NotFoundPage from "./pages/NotFoundPage";
+import { useEffect } from "react";
 
 function renderRoutes(role) {
   switch (role) {
@@ -14,6 +15,10 @@ function renderRoutes(role) {
             path="/admin/dashboard"
             element={<AdminDashboardPage />}
           ></Route>
+          <Route
+            path="/Login"
+            element={<AdminLoginPage />}
+          ></Route>
         </Routes>
       );
       break;
@@ -21,7 +26,7 @@ function renderRoutes(role) {
       return (
         <Routes>
           <Route exact path="/admin/dashboard" element={<NotFoundPage />}></Route>
-          <Route path="/" exact element={<AdminLoginPage />}></Route>
+          <Route path="/Login" exact element={<AdminLoginPage />}></Route>
         </Routes>
       );
       break;
@@ -30,6 +35,11 @@ function renderRoutes(role) {
 
 function Main() {
   const { state } = React.useContext(AuthContext);
+  const navigate = useNavigate()
+
+  useEffect(()=>{
+    navigate("/login", {replace: true})
+  }, [])
 
   return (
     <div className="h-full">

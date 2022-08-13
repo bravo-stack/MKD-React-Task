@@ -5,7 +5,6 @@ import * as yup from "yup";
 import MkdSDK from "../utils/MkdSDK";
 import { useNavigate } from "react-router-dom";
 import { AuthContext } from "../authContext";
-import SnackBar from "../components/SnackBar";
 
 const AdminLoginPage = () => {
   const schema = yup
@@ -41,13 +40,13 @@ const AdminLoginPage = () => {
             role: response.role,
           });
           navigate("/admin/dashboard", { replace: true });
+          console.log("LOGIN SUCCESSFUL")
         } else {
           navigate("/", { replace: true });
           throw new Error("Login Unsuccessful")
         }
       } catch(error) {
         console.log(error);
-        navigate("/", {replace: true});
       }
     } else {
       console.log("email is required");

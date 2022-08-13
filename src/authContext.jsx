@@ -51,15 +51,10 @@ const AuthProvider = ({ children }) => {
   React.useEffect(() => {
     //TODO
     const res = sdk.check(localStorage.getItem("role"));
-    if (res.error === false) {
-      dispatch({
-        type: "LOGIN"
-      });
-      console.log("okay")
-    } else {
-    dispatch({
-      type: "LOGOUT"
-      });
+    if (res.error === true)  {
+      tokenExpireError(()=>({
+      type: "Logout"
+    }), "TOKEN_EXPIRED")
       console.log("not okay")
     }
   }, []);
