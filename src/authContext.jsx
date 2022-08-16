@@ -14,6 +14,7 @@ const reducer = (state, action) => {
   switch (action.type) {
     case "LOGIN":
       //TODO
+      localStorage.setItem("token", action.token)
       return {
         ...state,
         isAuthenticated: action.isAuthenticated,
